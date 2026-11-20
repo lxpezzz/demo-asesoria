@@ -1,0 +1,64 @@
+:root {
+  /* Palette — architectural Spanish office */
+  --bg-offwhite: #f5f2ec;
+  --bg-ivory: #ebe6dc;
+  --surface-paper: #faf8f4;
+  --surface-stone: #dad3c6;
+  --surface-charcoal: #22201e;
+  --surface-charcoal-soft: #2e2b28;
+
+  --wood-oak: #bfa584;
+  --wood-oak-light: #d7c4ab;
+  --wood-oak-deep: #927756;
+
+  --ink-primary: #1d1c1a;
+  --ink-secondary: #4c4842;
+  --ink-muted: #6b655c;
+  --ink-on-dark: #f5f2ec;
+  --ink-on-dark-muted: #d0c9be;
+
+  --accent-terracotta: #a34f36;
+  --accent-terracotta-dark: #853c27;
+  --accent-terracotta-soft: rgba(163, 79, 54, 0.12);
+
+  --line-subtle: rgba(29, 28, 26, 0.13);
+  --line-strong: rgba(29, 28, 26, 0.28);
+  --line-on-dark: rgba(245, 242, 236, 0.22);
+
+  /* Typography */
+  --font-sans: 'Metropolis', 'Helvetica Neue', 'Arial', system-ui, -apple-system, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: clamp(0.96rem, 0.92rem + 0.2vw, 1.0625rem);
+  --text-lead: clamp(1.08rem, 1rem + 0.42vw, 1.3rem);
+  --text-h3: clamp(1.15rem, 1.05rem + 0.45vw, 1.4rem);
+  --text-h2: clamp(2rem, 1.45rem + 2.4vw, 3.65rem);
+  --text-h1: clamp(2.55rem, 1.8rem + 3.4vw, 5.1rem);
+
+  --leading-tight: 1.04;
+  --leading-snug: 1.18;
+  --leading-body: 1.62;
+
+  --tracking-tight: -0.03em;
+  --tracking-snug: -0.02em;
+  --tracking-label: 0.14em;
+
+  /* Spacing & layout */
+  --container-max: 1360px;
+  --gutter: clamp(1.25rem, 3.6vw, 3.5rem);
+  --header-height: 72px;
+  --rail-clearance: 6.5rem;
+
+  /* Motion */
+  --ease-architectural: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-med: 420ms;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 64px;
+    --rail-clearance: 0rem;
+  }
+}

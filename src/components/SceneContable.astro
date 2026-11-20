@@ -1,0 +1,40 @@
+---
+import SceneVisual from './SceneVisual.astro';
+import { CONTABLE_SERVICES, SCENE_VISUALS } from '../data/scenes';
+---
+
+<section
+  id="contable"
+  class="scene scene--ivory scene-contable scene-anchor"
+  aria-labelledby="titulo-contable"
+  data-scene="contable"
+  data-surface="dark"
+  data-scrim="right"
+>
+  <div class="container container--tour">
+    <div class="scene-contable__grid">
+      <div class="scene-inline-media" data-scene-media>
+        <SceneVisual spec={SCENE_VISUALS.contable} aspect="vertical" />
+      </div>
+
+      <div class="editorial-plate editorial-plate--right" data-scene-copy>
+        <p class="eyebrow">02 / ASESORÍA CONTABLE</p>
+        <h2 id="titulo-contable" class="display-h2">Tus números, siempre claros.</h2>
+        <p class="lead">
+          Organizamos y supervisamos la contabilidad de tu actividad para que tengas una visión más clara de tu negocio.
+        </p>
+
+        <ol class="contable-index" aria-label="Servicios de asesoría contable">
+          {
+            CONTABLE_SERVICES.map((item, index) => (
+              <li class="contable-index__item">
+                <span class="contable-index__code">02.{index + 1}</span>
+                <span class="contable-index__title">{item.title}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

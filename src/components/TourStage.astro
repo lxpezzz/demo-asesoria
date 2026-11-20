@@ -1,0 +1,154 @@
+---
+import { SCENE_LIST } from '../data/scenes';
+---
+
+<div class="tour-stage" aria-hidden="true" data-tour-stage>
+  <div class="tour-stage__layers">
+    {
+      SCENE_LIST.map((scene, index) => (
+        <div
+          class={`tour-stage__layer ${index === 0 ? 'is-initial' : ''}`}
+          data-stage-layer={scene.id}
+        >
+          <img
+            src={scene.imageDesktop}
+            alt=""
+            width={scene.width}
+            height={scene.height}
+            loading={index <= 1 ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+            decoding={index === 0 ? 'sync' : 'async'}
+            class="tour-stage__img"
+            style={`object-position: ${scene.focalPoint};`}
+            data-stage-img={scene.id}
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="tour-stage__scrim" data-stage-scrim="left"></div>
+
+  <div class="tour-stage__hud">
+    <span class="tour-stage__hud-code" data-stage-code>01 / ENTRADA</span>
+    <span class="tour-stage__hud-sep">/</span>
+    <span class="tour-stage__hud-room" data-stage-room>Umbral de acceso y recepción</span>
+  </div>
+</div>
+
+<style>
+  /* Hidden on mobile/tablet (<1024px) where dedicated 4:5 vertical photos lead the tour */
+  .tour-stage {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .tour-stage {
+      display: block;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+      background-color: var(--surface-charcoal);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tour-stage {
+      display: none !important;
+    }
+  }
+
+  .tour-stage__layers {
+    position: absolute;
+    inset: 0;
+  }
+
+  .tour-stage__layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .tour-stage__layer.is-initial {
+    opacity: 1;
+  }
+
+  .tour-stage__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  /* Delicate directional scrims for crisp editorial contrast without darkening the architecture */
+  .tour-stage__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: background 520ms var(--ease-architectural);
+    background: linear-gradient(
+      95deg,
+      rgba(22, 20, 18, 0.68) 0%,
+      rgba(22, 20, 18, 0.36) 40%,
+      rgba(22, 20, 18, 0.08) 72%,
+      rgba(22, 20, 18, 0.24) 100%
+    );
+  }
+
+  .tour-stage__scrim[data-stage-scrim='right'] {
+    background: linear-gradient(
+      265deg,
+      rgba(22, 20, 18, 0.56) 0%,
+      rgba(22, 20, 18, 0.28) 42%,
+      rgba(22, 20, 18, 0.06) 74%,
+      rgba(22, 20, 18, 0.16) 100%
+    );
+  }
+
+  .tour-stage__scrim[data-stage-scrim='bottom'] {
+    background: linear-gradient(
+      180deg,
+      rgba(22, 20, 18, 0.32) 0%,
+      rgba(22, 20, 18, 0.06) 38%,
+      rgba(22, 20, 18, 0.56) 100%
+    );
+  }
+
+  .tour-stage__hud {
+    position: absolute;
+    left: var(--gutter);
+    top: calc(var(--header-height) + 1rem);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0.8rem;
+    background-color: rgba(24, 22, 20, 0.68);
+    border: 1px solid rgba(245, 242, 236, 0.2);
+    color: var(--ink-on-dark);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+
+  .tour-stage__hud-code {
+    font-weight: 600;
+    color: var(--wood-oak-light);
+  }
+
+  .tour-stage__hud-sep {
+    opacity: 0.4;
+  }
+
+  .tour-stage__hud-room {
+    color: var(--ink-on-dark-muted);
+  }
+</style>

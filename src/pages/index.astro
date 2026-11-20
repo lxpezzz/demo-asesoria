@@ -1,11 +1,44 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import SiteHeader from '../components/SiteHeader.astro';
+import TourProgress from '../components/TourProgress.astro';
+import TourStage from '../components/TourStage.astro';
+import SceneEntrada from '../components/SceneEntrada.astro';
+import SceneFiscal from '../components/SceneFiscal.astro';
+import SceneContable from '../components/SceneContable.astro';
+import SceneLaboral from '../components/SceneLaboral.astro';
+import SceneReuniones from '../components/SceneReuniones.astro';
+import SceneContacto from '../components/SceneContacto.astro';
+import ConsultaSection from '../components/ConsultaSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 ---
 
 <Layout>
-	<Welcome />
+  <SiteHeader />
+  <TourProgress />
+
+  <main id="contenido-principal" class="tour-main">
+    <div class="tour-cinema">
+      <TourStage />
+
+      <div class="tour-chapters">
+        <SceneEntrada />
+        <SceneFiscal />
+        <SceneContable />
+        <SceneLaboral />
+        <SceneReuniones />
+        <SceneContacto />
+      </div>
+    </div>
+
+    <ConsultaSection />
+  </main>
+
+  <SiteFooter />
 </Layout>
+
+<script>
+  import { mountTour } from '../scripts/tour';
+
+  mountTour();
+</script>

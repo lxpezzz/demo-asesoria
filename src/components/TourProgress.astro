@@ -1,0 +1,129 @@
+---
+import { TOUR_NAV } from '../data/scenes';
+---
+
+<nav
+  class="tour-progress"
+  aria-label="Progreso del recorrido por la asesoría"
+  data-tour-progress
+  data-surface="dark"
+>
+  <div class="tour-progress__rail" aria-hidden="true">
+    <span class="tour-progress__fill" data-tour-rail-fill></span>
+  </div>
+  <ol class="tour-progress__list">
+    {
+      TOUR_NAV.map((step, index) => (
+        <li class="tour-progress__item">
+          <a
+            href={`#${step.id}`}
+            class={`tour-progress__link ${index === 0 ? 'is-active' : ''}`}
+            data-progress-target={step.id}
+            aria-current={index === 0 ? 'location' : undefined}
+          >
+            <span class="tour-progress__num">{step.number}</span>
+            <span class="tour-progress__sep" aria-hidden="true">/</span>
+            <span class="tour-progress__label">{step.shortLabel}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .tour-progress {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .tour-progress {
+      position: fixed;
+      top: 50%;
+      right: clamp(1rem, 2vw, 1.85rem);
+      transform: translateY(-50%);
+      z-index: 80;
+      display: flex;
+      align-items: stretch;
+      gap: 0.85rem;
+      padding: 0.75rem 0.65rem;
+      transition: color var(--dur-med) var(--ease-architectural);
+    }
+  }
+
+  .tour-progress[data-surface='dark'] {
+    color: var(--ink-on-dark);
+  }
+
+  .tour-progress:not([data-surface='dark']) {
+    color: var(--ink-primary);
+  }
+
+  .tour-progress__rail {
+    position: relative;
+    width: 1px;
+    background-color: currentColor;
+    opacity: 0.22;
+    overflow: hidden;
+  }
+
+  .tour-progress__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-terracotta);
+    transform: scaleY(0.16);
+    transform-origin: top center;
+    transition: transform 280ms var(--ease-architectural);
+  }
+
+  .tour-progress[data-surface='dark'] .tour-progress__fill {
+    background-color: var(--wood-oak-light);
+  }
+
+  .tour-progress__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .tour-progress__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.48;
+    padding-block: 0.15rem;
+    transition:
+      opacity var(--dur-fast) var(--ease-architectural),
+      transform var(--dur-fast) var(--ease-architectural);
+  }
+
+  .tour-progress__link:hover {
+    opacity: 0.88;
+  }
+
+  .tour-progress__link.is-active {
+    opacity: 1;
+    font-weight: 700;
+    transform: translateX(-3px);
+  }
+
+  .tour-progress__link.is-active .tour-progress__num {
+    color: var(--accent-terracotta-dark);
+  }
+
+  .tour-progress[data-surface='dark'] .tour-progress__link.is-active .tour-progress__num {
+    color: var(--wood-oak-light);
+  }
+
+  .tour-progress__sep {
+    opacity: 0.45;
+  }
+</style>

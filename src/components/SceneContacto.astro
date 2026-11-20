@@ -1,0 +1,40 @@
+---
+import SceneVisual from './SceneVisual.astro';
+import { SCENE_VISUALS } from '../data/scenes';
+---
+
+<section
+  id="contacto"
+  class="scene scene--offwhite scene-contacto scene-anchor"
+  aria-labelledby="titulo-contacto"
+  data-scene="contacto"
+  data-surface="dark"
+  data-scrim="left"
+>
+  <div class="container container--tour">
+    <div class="scene-contacto__top">
+      <div class="scene-inline-media" data-scene-media>
+        <SceneVisual spec={SCENE_VISUALS.contacto} aspect="vertical" />
+      </div>
+
+      <div class="editorial-plate" data-scene-copy>
+        <p class="eyebrow">05 / DESPACHO PRIVADO · CONTACTO</p>
+        <h2 id="titulo-contacto" class="display-h2">
+          Ahora, hablemos de tu negocio.
+        </h2>
+        <p class="lead">
+          Cuéntanos qué necesitas. Estaremos encantados de escucharte.
+        </p>
+        <div>
+          <a href="#consulta" class="btn btn--primary" data-focus-consulta>
+            <span>Solicitar una consulta</span>
+            <svg class="btn__icon btn__icon--down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <polyline points="6 13 12 19 18 13" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

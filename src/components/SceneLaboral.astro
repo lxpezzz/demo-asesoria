@@ -1,0 +1,46 @@
+---
+import SceneVisual from './SceneVisual.astro';
+import { LABORAL_SERVICES, SCENE_VISUALS } from '../data/scenes';
+---
+
+<section
+  id="laboral"
+  class="scene scene--offwhite scene-laboral scene-anchor"
+  aria-labelledby="titulo-laboral"
+  data-scene="laboral"
+  data-surface="dark"
+  data-scrim="bottom"
+>
+  <div class="container container--tour">
+    <div class="scene-laboral__stack">
+      <div class="scene-inline-media" data-scene-media>
+        <SceneVisual spec={SCENE_VISUALS.laboral} aspect="vertical" />
+      </div>
+
+      <div class="editorial-plate editorial-plate--wide" data-scene-copy>
+        <div class="scene-laboral__spread">
+          <div class="scene-laboral__intro">
+            <p class="eyebrow">03 / ASESORÍA LABORAL</p>
+            <h2 id="titulo-laboral" class="display-h2">
+              Tu equipo también es nuestra prioridad.
+            </h2>
+            <p class="lead">
+              Te acompañamos en la gestión laboral de tu empresa, desde la contratación hasta las obligaciones con la Seguridad Social.
+            </p>
+          </div>
+
+          <ol class="laboral-list" aria-label="Servicios de asesoría laboral">
+            {
+              LABORAL_SERVICES.map((item, index) => (
+                <li class="laboral-list__item">
+                  <span class="laboral-list__title">{item.title}</span>
+                  <span class="laboral-list__num">03.{index + 1}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

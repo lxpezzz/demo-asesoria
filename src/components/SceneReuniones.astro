@@ -1,0 +1,47 @@
+---
+import SceneVisual from './SceneVisual.astro';
+import { SCENE_VISUALS, WORK_PILLARS } from '../data/scenes';
+---
+
+<section
+  id="nosotros"
+  class="scene scene--ivory scene-reuniones scene-anchor"
+  aria-labelledby="titulo-reuniones"
+  data-scene="nosotros"
+  data-surface="dark"
+  data-scrim="bottom"
+>
+  <div class="container container--tour">
+    <div class="scene-reuniones__wrap">
+      <div class="scene-inline-media" data-scene-media>
+        <SceneVisual spec={SCENE_VISUALS.nosotros} aspect="vertical" />
+      </div>
+
+      <div class="editorial-plate editorial-plate--wide" data-scene-copy>
+        <div class="scene-reuniones__header">
+          <div class="scene-reuniones__heading-group">
+            <p class="eyebrow">04 / NUESTRA FORMA DE TRABAJAR</p>
+            <h2 id="titulo-reuniones" class="display-h2">
+              Aquí, conocemos tu nombre. Y tu negocio.
+            </h2>
+          </div>
+          <p class="lead">
+            Creemos en una asesoría donde puedas preguntar, recibir explicaciones claras y hablar directamente con las personas que llevan tus gestiones.
+          </p>
+        </div>
+
+        <div class="pillars-editorial" data-scene-pillars>
+          {
+            WORK_PILLARS.map((pillar) => (
+              <article class="pillar">
+                <span class="pillar__roman" aria-hidden="true">{pillar.roman}</span>
+                <h3 class="pillar__title">{pillar.title}</h3>
+                <p class="pillar__body">{pillar.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

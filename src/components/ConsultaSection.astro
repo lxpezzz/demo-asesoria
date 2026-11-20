@@ -1,0 +1,89 @@
+---
+---
+
+<section
+  id="consulta"
+  class="consulta-section scene-anchor"
+  aria-labelledby="titulo-consulta"
+  data-surface-band="ivory"
+>
+  <div class="container container--tour">
+    <div class="consulta-block">
+      <div class="consulta-block__aside">
+        <p class="eyebrow">CONSULTA INICIAL</p>
+        <h2 id="titulo-consulta" class="consulta-block__title">
+          Preparado para recibir tu mensaje
+        </h2>
+        <p class="lead">
+          Indícanos brevemente en qué área necesitas apoyo y cómo prefieres que contactemos contigo.
+        </p>
+        <p class="consulta-block__notice">
+          <strong>Formulario de demostración:</strong> esta fase corresponde a la maqueta conceptual de la homepage. No existe envío ni reserva activa conectada todavía.
+        </p>
+      </div>
+
+      <form class="consulta-form" data-demo-form novalidate>
+        <div class="consulta-form__row">
+          <div class="field">
+            <label for="consulta-nombre" class="field__label">Nombre y apellidos</label>
+            <input
+              id="consulta-nombre"
+              name="nombre"
+              type="text"
+              autocomplete="name"
+              placeholder="Ej. María Gómez"
+              class="field__input"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="consulta-correo" class="field__label">Correo electrónico</label>
+            <input
+              id="consulta-correo"
+              name="correo"
+              type="email"
+              autocomplete="email"
+              placeholder="nombre@ejemplo.es"
+              class="field__input"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="consulta-area" class="field__label">Área de consulta</label>
+          <select id="consulta-area" name="area" class="field__input">
+            <option value="fiscal">Asesoría fiscal</option>
+            <option value="contable">Asesoría contable</option>
+            <option value="laboral">Asesoría laboral</option>
+            <option value="general">Consulta general</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="consulta-mensaje" class="field__label">¿En qué podemos ayudarte?</label>
+          <textarea
+            id="consulta-mensaje"
+            name="mensaje"
+            rows="4"
+            placeholder="Cuéntanos brevemente tu actividad o la consulta que quieres resolver."
+            class="field__input field__textarea"
+            required
+          ></textarea>
+        </div>
+
+        <div class="consulta-form__actions">
+          <button type="submit" class="btn btn--primary">
+            <span>Probar formulario (demo)</span>
+          </button>
+          <p class="consulta-form__disclaimer">
+            Los datos introducidos no se envían ni se almacenan en esta versión conceptual.
+          </p>
+        </div>
+
+        <div class="consulta-form__status" role="status" aria-live="polite" hidden data-demo-status></div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+---
+import SceneVisual from './SceneVisual.astro';
+import { SCENE_VISUALS } from '../data/scenes';
+---
+
+<section
+  id="entrada"
+  class="scene-entrada scene-anchor"
+  aria-labelledby="titulo-entrada"
+  data-scene="entrada"
+  data-surface="dark"
+  data-scrim="left"
+>
+  <div class="scene-entrada__stage scene-inline-media" data-hero-stage>
+    <SceneVisual spec={SCENE_VISUALS.entrada} aspect="hero" priority={true} showCaption={false} />
+  </div>
+  <div class="scene-entrada__scrim" aria-hidden="true"></div>
+
+  <div class="container container--tour scene-entrada__content">
+    <div class="scene-entrada__copy" data-hero-copy>
+      <p class="eyebrow eyebrow--on-dark">01 / ENTRADA · UNA VISITA POR NUESTRA ASESORÍA</p>
+      <h1 id="titulo-entrada" class="display-h1">Tu negocio, en buenas manos.</h1>
+      <p class="scene-entrada__subtitle">
+        Asesoramiento fiscal, laboral y contable con el trato cercano de siempre.
+      </p>
+      <div class="scene-entrada__actions">
+        <a href="#fiscal" class="btn btn--on-dark">
+          <span>Conoce nuestra asesoría</span>
+          <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="13 6 19 12 13 18" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene-entrada__footer">
+    <div class="container container--tour scene-entrada__footer-inner">
+      <a href="#fiscal" class="scroll-cue">
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+        <span>Desliza para entrar</span>
+        <svg class="btn__icon btn__icon--down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <polyline points="6 13 12 19 18 13" />
+        </svg>
+      </a>
+      <p class="scene-entrada__meta">Despacho familiar · Recorrido arquitectónico</p>
+    </div>
+  </div>
+</section>

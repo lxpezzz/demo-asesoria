@@ -1,0 +1,751 @@
+/* ==========================================================================
+   ARCHITECTURAL TOUR — CONTINUOUS DESKTOP STAGE + VERTICAL MOBILE WALKTHROUGH
+   ========================================================================== */
+
+.tour-main {
+  position: relative;
+}
+
+.tour-cinema {
+  position: relative;
+}
+
+.tour-chapters {
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1024px) {
+  .tour-chapters {
+    margin-top: -100vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-chapters {
+    margin-top: 0 !important;
+  }
+}
+
+/* Inline scene media: visible on mobile/tablet (<1024px) & reduced-motion;
+   on desktop (>=1024px) the continuous sticky TourStage displays the architecture */
+.scene-inline-media {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .scene-inline-media {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-inline-media {
+    display: block !important;
+  }
+}
+
+/* Shared architectural scene container */
+.scene {
+  position: relative;
+  border-bottom: 1px solid var(--line-subtle);
+}
+
+.scene--offwhite {
+  background-color: var(--bg-offwhite);
+}
+
+.scene--ivory {
+  background-color: var(--bg-ivory);
+}
+
+@media (min-width: 1024px) {
+  .tour-chapters .scene {
+    background-color: transparent;
+    border-bottom: 0;
+    min-height: 118vh;
+    display: flex;
+    align-items: center;
+    padding-block: clamp(6rem, 11vh, 9rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-chapters .scene {
+    min-height: auto !important;
+    background-color: var(--bg-offwhite) !important;
+    border-bottom: 1px solid var(--line-subtle) !important;
+  }
+
+  .tour-chapters .scene--ivory {
+    background-color: var(--bg-ivory) !important;
+  }
+}
+
+/* Swiss editorial paper plate used on desktop over the continuous architectural stage */
+.editorial-plate {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+@media (min-width: 1024px) {
+  .editorial-plate {
+    background-color: rgba(245, 242, 236, 0.94);
+    border: 1px solid var(--line-subtle);
+    padding: clamp(2rem, 3.2vw, 3rem);
+    max-width: 34rem;
+    color: var(--ink-primary);
+  }
+
+  .editorial-plate--wide {
+    max-width: 58rem;
+  }
+
+  .editorial-plate--right {
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-plate {
+    background-color: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SCENE 01 — ENTRADA / HERO
+   -------------------------------------------------------------------------- */
+.scene-entrada {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background-color: var(--surface-charcoal);
+  color: var(--ink-on-dark);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-subtle);
+}
+
+@media (min-width: 1024px) {
+  .scene-entrada {
+    min-height: 112vh;
+    background-color: transparent;
+    border-bottom: 0;
+  }
+}
+
+.scene-entrada__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.scene-entrada__stage .scene-visual {
+  width: 100%;
+  height: 100%;
+}
+
+.scene-entrada__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 20, 18, 0.45) 0%,
+    rgba(22, 20, 18, 0.56) 46%,
+    rgba(22, 20, 18, 0.84) 100%
+  );
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .scene-entrada__scrim {
+    display: none;
+  }
+}
+
+.scene-entrada__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: calc(var(--header-height) + 3.5rem);
+  padding-bottom: clamp(2.5rem, 8vh, 5.5rem);
+}
+
+.scene-entrada__copy {
+  max-width: 39rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.scene-entrada__subtitle {
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  color: var(--ink-on-dark-muted);
+  max-width: 44ch;
+}
+
+.scene-entrada__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 0.4rem;
+}
+
+.scene-entrada__footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--line-on-dark);
+}
+
+.scene-entrada__footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.05rem;
+}
+
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-on-dark);
+}
+
+.scroll-cue__line {
+  position: relative;
+  width: 1px;
+  height: 26px;
+  background: rgba(245, 242, 236, 0.34);
+  overflow: hidden;
+}
+
+.scroll-cue__line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--ink-on-dark);
+  animation: scroll-line 2.4s var(--ease-architectural) infinite;
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: translateY(0);
+  }
+  55% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__line::after {
+    animation: none;
+    top: 0;
+  }
+}
+
+.scene-entrada__meta {
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-on-dark-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   SCENE 02 — ÁREA FISCAL
+   -------------------------------------------------------------------------- */
+.scene-fiscal {
+  padding-block: clamp(3.5rem, 7vh, 5.5rem);
+}
+
+.scene-fiscal__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .scene-fiscal__grid {
+    display: block;
+  }
+}
+
+.service-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-subtle);
+  margin-top: 0.25rem;
+}
+
+.service-list__item {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--line-subtle);
+}
+
+.service-list__num {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+.service-list__title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--ink-primary);
+}
+
+.fiscal-detail {
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--line-strong);
+  padding-top: 1.15rem;
+}
+
+.fiscal-detail[hidden] {
+  display: none;
+}
+
+.fiscal-detail__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.fiscal-detail__item h3 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.fiscal-detail__item p {
+  font-size: var(--text-sm);
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.fiscal-detail__note {
+  margin-top: 0.85rem;
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+}
+
+/* --------------------------------------------------------------------------
+   SCENE 03 — ÁREA CONTABLE (Right-aligned editorial plate over sunlit wall)
+   -------------------------------------------------------------------------- */
+.scene-contable {
+  padding-block: clamp(3.5rem, 7vh, 5.5rem);
+}
+
+.scene-contable__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .scene-contable__grid {
+    display: block;
+  }
+}
+
+.contable-index {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line-subtle);
+  margin-top: 0.3rem;
+}
+
+@media (min-width: 560px) {
+  .contable-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.contable-index__item {
+  padding: 0.9rem 0.9rem 0.9rem 0;
+  border-bottom: 1px solid var(--line-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+@media (min-width: 560px) {
+  .contable-index__item:nth-child(odd) {
+    padding-right: 1.25rem;
+  }
+
+  .contable-index__item:nth-child(even) {
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--line-subtle);
+  }
+}
+
+.contable-index__code {
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-terracotta-dark);
+  font-weight: 600;
+}
+
+.contable-index__title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   SCENE 04 — ÁREA LABORAL (Panoramic pan + bottom two-column editorial spread)
+   -------------------------------------------------------------------------- */
+.scene-laboral {
+  padding-block: clamp(3.5rem, 7vh, 5.5rem);
+}
+
+@media (min-width: 1024px) {
+  .scene-laboral {
+    align-items: flex-end !important;
+    padding-bottom: clamp(4.5rem, 8vh, 6.5rem) !important;
+  }
+}
+
+.scene-laboral__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.scene-laboral__spread {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+@media (min-width: 820px) {
+  .scene-laboral__spread {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
+  }
+}
+
+.scene-laboral__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.laboral-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-subtle);
+}
+
+.laboral-list__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.78rem;
+  border-bottom: 1px solid var(--line-subtle);
+}
+
+.laboral-list__title {
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.laboral-list__num {
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+/* --------------------------------------------------------------------------
+   SCENE 05 — MESA DE REUNIONES (Calm editorial publication spread)
+   -------------------------------------------------------------------------- */
+.scene-reuniones {
+  padding-block: clamp(4rem, 8vh, 6.5rem);
+}
+
+@media (min-width: 1024px) {
+  .scene-reuniones {
+    min-height: 128vh !important;
+    align-items: flex-end !important;
+    padding-bottom: clamp(4.5rem, 8vh, 6.5rem) !important;
+  }
+}
+
+.scene-reuniones__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.scene-reuniones__header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .scene-reuniones__header {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: end;
+    gap: 2.5rem;
+  }
+}
+
+.scene-reuniones__heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pillars-editorial {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line-strong);
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .pillars-editorial {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.pillar {
+  padding-block: 1.35rem;
+  border-bottom: 1px solid var(--line-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+@media (min-width: 768px) {
+  .pillar {
+    padding: 1.5rem 1.5rem 0.25rem;
+    border-bottom: 0;
+    border-right: 1px solid var(--line-subtle);
+  }
+
+  .pillar:first-child {
+    padding-left: 0;
+  }
+
+  .pillar:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+}
+
+.pillar__roman {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  color: var(--accent-terracotta-dark);
+}
+
+.pillar__title {
+  font-size: var(--text-h3);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink-primary);
+}
+
+.pillar__body {
+  font-size: var(--text-sm);
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   SCENE 06 — DESPACHO PRIVADO (Arrival) + CONSULTA BLOCK
+   -------------------------------------------------------------------------- */
+.scene-contacto {
+  padding-block: clamp(4rem, 8vh, 6.5rem);
+}
+
+.scene-contacto__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .scene-contacto__top {
+    display: block;
+  }
+}
+
+/* Dedicated solid ivory consultation band right after the architectural tour */
+.consulta-section {
+  position: relative;
+  z-index: 4;
+  background-color: var(--bg-ivory);
+  border-top: 1px solid var(--line-strong);
+  padding-block: clamp(4rem, 8vh, 6.5rem);
+}
+
+.consulta-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+}
+
+@media (min-width: 900px) {
+  .consulta-block {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  }
+}
+
+.consulta-block__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.consulta-block__title {
+  font-size: var(--text-h3);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.consulta-block__notice {
+  padding: 1rem 1.15rem;
+  border-left: 2px solid var(--accent-terracotta);
+  background-color: var(--surface-paper);
+  font-size: var(--text-sm);
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.consulta-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem;
+}
+
+.consulta-form__row {
+  display: grid;
+  gap: 1.35rem;
+}
+
+@media (min-width: 640px) {
+  .consulta-form__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+
+.field__input {
+  width: 100%;
+  padding: 0.85rem 0.2rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: var(--text-base);
+  color: var(--ink-primary);
+  border-radius: 0;
+  transition: border-color var(--dur-fast) var(--ease-architectural);
+}
+
+.field__input:hover {
+  border-bottom-color: var(--ink-primary);
+}
+
+.field__input:focus {
+  outline: none;
+  border-bottom-color: var(--accent-terracotta);
+}
+
+.field__input:focus-visible {
+  outline: 2px solid var(--accent-terracotta);
+  outline-offset: 4px;
+}
+
+.field__textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+}
+
+.consulta-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.consulta-form__disclaimer {
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  max-width: 40ch;
+}
+
+.consulta-form__status {
+  margin-top: 0.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--accent-terracotta);
+  background-color: var(--surface-paper);
+  font-size: var(--text-sm);
+  color: var(--ink-primary);
+  line-height: 1.55;
+}
+
+.consulta-form__status[hidden] {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .scene-entrada__footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .scene-entrada__actions .btn {
+    width: auto;
+  }
+}

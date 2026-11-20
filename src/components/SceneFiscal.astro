@@ -1,0 +1,74 @@
+---
+import SceneVisual from './SceneVisual.astro';
+import { FISCAL_SERVICES, SCENE_VISUALS } from '../data/scenes';
+---
+
+<section
+  id="fiscal"
+  class="scene scene--offwhite scene-fiscal scene-anchor"
+  aria-labelledby="titulo-fiscal"
+  data-scene="fiscal"
+  data-surface="dark"
+  data-scrim="left"
+>
+  <div class="container container--tour">
+    <div class="scene-fiscal__grid">
+      <div class="scene-inline-media" data-scene-media>
+        <SceneVisual spec={SCENE_VISUALS.fiscal} aspect="vertical" />
+      </div>
+
+      <div class="editorial-plate" data-scene-copy>
+        <p class="eyebrow">01 / ASESORÍA FISCAL</p>
+        <h2 id="titulo-fiscal" class="display-h2">
+          Nos ocupamos de tus impuestos. Tú, de tu negocio.
+        </h2>
+        <p class="lead">
+          Te ayudamos con tus obligaciones fiscales, declaraciones y planificación tributaria para que puedas trabajar con tranquilidad.
+        </p>
+
+        <ol class="service-list" aria-label="Servicios de asesoría fiscal">
+          {
+            FISCAL_SERVICES.map((item, index) => (
+              <li class="service-list__item">
+                <span class="service-list__num">0{index + 1}</span>
+                <span class="service-list__title">{item.title}</span>
+              </li>
+            ))
+          }
+        </ol>
+
+        <div>
+          <button
+            type="button"
+            class="btn"
+            aria-expanded="false"
+            aria-controls="fiscal-detalle"
+            data-toggle-detail="fiscal-detalle"
+          >
+            <span>Conocer asesoría fiscal</span>
+            <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="13 6 19 12 13 18" />
+            </svg>
+          </button>
+        </div>
+
+        <div id="fiscal-detalle" class="fiscal-detail" hidden>
+          <div class="fiscal-detail__grid">
+            {
+              FISCAL_SERVICES.map((item) => (
+                <article class="fiscal-detail__item">
+                  <h3>{item.title}</h3>
+                  <p>{item.note}</p>
+                </article>
+              ))
+            }
+          </div>
+          <p class="fiscal-detail__note">
+            En fases posteriores, este acceso enlazará directamente con la página dedicada de Asesoría Fiscal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
