@@ -14,7 +14,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 ---
 
 <Layout>
-  <SiteHeader />
+  <SiteHeader surface="dark" />
   <TourProgress />
 
   <main id="contenido-principal" class="tour-main">
@@ -34,7 +34,7 @@ import SiteFooter from '../components/SiteFooter.astro';
     <ConsultaSection />
   </main>
 
-  <SiteFooter />
+  <SiteFooter hasTourRail={true} />
 </Layout>
 
 <script>

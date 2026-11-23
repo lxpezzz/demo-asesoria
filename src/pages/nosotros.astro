@@ -1,0 +1,172 @@
+---
+import InteriorLayout from '../layouts/InteriorLayout.astro';
+import PageCtaBand from '../components/PageCtaBand.astro';
+import { NOSOTROS_PAGE } from '../data/pages';
+import { SCENE_VISUALS } from '../data/scenes';
+
+const reunionesVisual = SCENE_VISUALS.nosotros;
+const entradaVisual = SCENE_VISUALS.entrada;
+const despachoVisual = SCENE_VISUALS.contacto;
+---
+
+<InteriorLayout
+  title={NOSOTROS_PAGE.meta.title}
+  description={NOSOTROS_PAGE.meta.description}
+  ogImage={reunionesVisual.imageDesktop}
+  headerSurface="light"
+>
+  <section class="hero-monograph" aria-labelledby="titulo-nosotros-page">
+    <div class="container">
+      <nav class="page-crumb" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Nosotros</span>
+      </nav>
+
+      <div class="hero-monograph__header">
+        <p class="eyebrow">{NOSOTROS_PAGE.hero.eyebrow}</p>
+        <h1 id="titulo-nosotros-page" class="display-h1">{NOSOTROS_PAGE.hero.title}</h1>
+        <p class="lead">{NOSOTROS_PAGE.hero.lead}</p>
+      </div>
+
+      <figure class="hero-monograph__figure">
+        <picture>
+          <source media="(max-width: 767px)" srcset={reunionesVisual.imageMobile} type="image/webp" />
+          <img
+            src={reunionesVisual.imageDesktop}
+            alt={reunionesVisual.alt}
+            width={reunionesVisual.width}
+            height={reunionesVisual.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+            style={`object-position: ${reunionesVisual.focalPoint};`}
+          />
+        </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band band--paper" aria-labelledby="nosotros-quienes">
+    <div class="container">
+      <div class="essay-grid">
+        <div class="essay-grid__head">
+          <p class="eyebrow">{NOSOTROS_PAGE.whoWeAre.eyebrow}</p>
+          <h2 id="nosotros-quienes" class="display-h2">{NOSOTROS_PAGE.whoWeAre.title}</h2>
+        </div>
+
+        <div class="essay-grid__body">
+          {NOSOTROS_PAGE.whoWeAre.paragraphs.map((text) => <p>{text}</p>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="nosotros-forma">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{NOSOTROS_PAGE.howWeWork.eyebrow}</p>
+        <h2 id="nosotros-forma" class="display-h2">{NOSOTROS_PAGE.howWeWork.title}</h2>
+      </div>
+
+      <div class="ledger-grid">
+        {
+          NOSOTROS_PAGE.howWeWork.items.map((item) => (
+            <article class="ledger-cell">
+              <span class="ledger-cell__code">{item.code}</span>
+              <h3 class="ledger-cell__title">{item.title}</h3>
+              <p class="ledger-cell__desc">{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--ivory" aria-labelledby="nosotros-despacho">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">{NOSOTROS_PAGE.office.eyebrow}</p>
+          <h2 id="nosotros-despacho" class="display-h2">{NOSOTROS_PAGE.office.title}</h2>
+        </div>
+        <p class="lead">{NOSOTROS_PAGE.office.lead}</p>
+      </div>
+
+      <div class="office-gallery">
+        <figure class="office-card">
+          <div class="office-card__frame">
+            <img
+              src={entradaVisual.imageDesktop}
+              alt={entradaVisual.alt}
+              width={entradaVisual.width}
+              height={entradaVisual.height}
+              loading="lazy"
+              decoding="async"
+              style={`object-position: ${entradaVisual.focalPoint};`}
+            />
+          </div>
+          <figcaption class="office-card__caption">
+            <span class="office-card__code">{NOSOTROS_PAGE.office.captions[0].code}</span>
+            <div>
+              <p class="office-card__title">{NOSOTROS_PAGE.office.captions[0].title}</p>
+              <p class="office-card__note">{NOSOTROS_PAGE.office.captions[0].note}</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="office-card office-card--tall">
+          <div class="office-card__frame">
+            <img
+              src={despachoVisual.imageDesktop}
+              alt={despachoVisual.alt}
+              width={despachoVisual.width}
+              height={despachoVisual.height}
+              loading="lazy"
+              decoding="async"
+              style={`object-position: ${despachoVisual.focalPoint};`}
+            />
+          </div>
+          <figcaption class="office-card__caption">
+            <span class="office-card__code">{NOSOTROS_PAGE.office.captions[1].code}</span>
+            <div>
+              <p class="office-card__title">{NOSOTROS_PAGE.office.captions[1].title}</p>
+              <p class="office-card__note">{NOSOTROS_PAGE.office.captions[1].note}</p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="nosotros-diferencia">
+    <div class="container">
+      <div class="statement-grid">
+        <div class="statement-grid__lead">
+          <p class="eyebrow">{NOSOTROS_PAGE.differences.eyebrow}</p>
+          <h2 id="nosotros-diferencia" class="display-h2">{NOSOTROS_PAGE.differences.title}</h2>
+        </div>
+
+        <div class="prose-stack">
+          {
+            NOSOTROS_PAGE.differences.items.map((item) => (
+              <article class="prose-stack__item">
+                <h3 class="prose-stack__title">{item.title}</h3>
+                <p class="prose-stack__desc">{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <PageCtaBand
+    eyebrow={NOSOTROS_PAGE.cta.eyebrow}
+    title={NOSOTROS_PAGE.cta.title}
+    description={NOSOTROS_PAGE.cta.description}
+    primaryCta={NOSOTROS_PAGE.cta.primaryCta}
+    secondaryCta={NOSOTROS_PAGE.cta.secondaryCta}
+    variant="dark"
+  />
+</InteriorLayout>

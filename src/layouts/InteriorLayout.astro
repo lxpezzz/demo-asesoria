@@ -1,0 +1,23 @@
+---
+import Layout from './Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  headerSurface?: 'dark' | 'light' | 'ivory';
+  flushTop?: boolean;
+}
+
+const { title, description, ogImage, headerSurface = 'light', flushTop = false } = Astro.props;
+---
+
+<Layout title={title} description={description} ogImage={ogImage}>
+  <SiteHeader surface={headerSurface} />
+  <main id="contenido-principal" class={`interior-main ${flushTop ? 'interior-main--flush' : ''}`}>
+    <slot />
+  </main>
+  <SiteFooter hasTourRail={false} />
+</Layout>

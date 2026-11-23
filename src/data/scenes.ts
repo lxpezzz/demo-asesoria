@@ -5,6 +5,7 @@ export interface ServiceItem {
 
 export interface TourNavItem {
   id: string;
+  href: string;
   number: string;
   shortLabel: string;
   navLabel: string;
@@ -37,12 +38,12 @@ export const SITE_META = {
 };
 
 export const TOUR_NAV: TourNavItem[] = [
-  { id: 'entrada', number: '01', shortLabel: 'ENTRADA', navLabel: 'Inicio', surface: 'dark' },
-  { id: 'fiscal', number: '02', shortLabel: 'FISCAL', navLabel: 'Fiscal', surface: 'dark' },
-  { id: 'contable', number: '03', shortLabel: 'CONTABLE', navLabel: 'Contable', surface: 'dark' },
-  { id: 'laboral', number: '04', shortLabel: 'LABORAL', navLabel: 'Laboral', surface: 'dark' },
-  { id: 'nosotros', number: '05', shortLabel: 'NOSOTROS', navLabel: 'Nosotros', surface: 'dark' },
-  { id: 'contacto', number: '06', shortLabel: 'CONTACTO', navLabel: 'Contacto', surface: 'dark' },
+  { id: 'entrada', href: '/', number: '01', shortLabel: 'ENTRADA', navLabel: 'Inicio', surface: 'dark' },
+  { id: 'fiscal', href: '/fiscal', number: '02', shortLabel: 'FISCAL', navLabel: 'Fiscal', surface: 'dark' },
+  { id: 'contable', href: '/contable', number: '03', shortLabel: 'CONTABLE', navLabel: 'Contable', surface: 'dark' },
+  { id: 'laboral', href: '/laboral', number: '04', shortLabel: 'LABORAL', navLabel: 'Laboral', surface: 'dark' },
+  { id: 'nosotros', href: '/nosotros', number: '05', shortLabel: 'NOSOTROS', navLabel: 'Nosotros', surface: 'dark' },
+  { id: 'contacto', href: '/contacto', number: '06', shortLabel: 'CONTACTO', navLabel: 'Contacto', surface: 'dark' },
 ];
 
 export const SCENE_VISUALS: Record<SceneVisualSpec['id'], SceneVisualSpec> = {

@@ -6,14 +6,22 @@ import '@fontsource/metropolis/700.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/scenes.css';
+import '../styles/pages.css';
 import { SITE_META } from '../data/scenes';
 
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title = SITE_META.title, description = SITE_META.description } = Astro.props;
+const {
+  title = SITE_META.title,
+  description = SITE_META.description,
+  ogImage = '/images/scenes/scene-01-entrada.webp',
+  noindex = true,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -22,11 +30,14 @@ const { title = SITE_META.title, description = SITE_META.description } = Astro.p
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#F5F2EC" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={`${SITE_META.brandName} · ${SITE_META.brandDescriptor}`} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
@@ -35,5 +46,10 @@ const { title = SITE_META.title, description = SITE_META.description } = Astro.p
   <body>
     <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
     <slot />
+    <script>
+      import { mountSite } from '../scripts/site';
+
+      mountSite();
+    </script>
   </body>
 </html>

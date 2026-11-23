@@ -38,35 +38,13 @@ import { FISCAL_SERVICES, SCENE_VISUALS } from '../data/scenes';
         </ol>
 
         <div>
-          <button
-            type="button"
-            class="btn"
-            aria-expanded="false"
-            aria-controls="fiscal-detalle"
-            data-toggle-detail="fiscal-detalle"
-          >
+          <a href="/fiscal" class="btn">
             <span>Conocer asesoría fiscal</span>
             <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="13 6 19 12 13 18" />
             </svg>
-          </button>
-        </div>
-
-        <div id="fiscal-detalle" class="fiscal-detail" hidden>
-          <div class="fiscal-detail__grid">
-            {
-              FISCAL_SERVICES.map((item) => (
-                <article class="fiscal-detail__item">
-                  <h3>{item.title}</h3>
-                  <p>{item.note}</p>
-                </article>
-              ))
-            }
-          </div>
-          <p class="fiscal-detail__note">
-            En fases posteriores, este acceso enlazará directamente con la página dedicada de Asesoría Fiscal.
-          </p>
+          </a>
         </div>
       </div>
     </div>

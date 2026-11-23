@@ -1,0 +1,47 @@
+---
+interface CtaAction {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryCta: CtaAction;
+  secondaryCta?: CtaAction;
+  variant?: 'ivory' | 'dark';
+}
+
+const { eyebrow, title, description, primaryCta, secondaryCta, variant = 'dark' } = Astro.props;
+const isDark = variant === 'dark';
+---
+
+<section class={`band ${isDark ? 'band--charcoal' : 'band--ivory'} page-cta`}>
+  <div class="container">
+    <div class="page-cta__inner">
+      <div class="page-cta__copy">
+        <p class={`eyebrow ${isDark ? 'eyebrow--on-dark' : ''}`}>{eyebrow}</p>
+        <h2 class="display-h2">{title}</h2>
+        <p class={`lead ${isDark ? 'lead--on-dark' : ''}`}>{description}</p>
+      </div>
+
+      <div class="page-cta__actions">
+        <a href={primaryCta.href} class={`btn ${isDark ? 'btn--on-dark-solid' : 'btn--primary'}`}>
+          <span>{primaryCta.label}</span>
+          <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="13 6 19 12 13 18" />
+          </svg>
+        </a>
+        {
+          secondaryCta && (
+            <a href={secondaryCta.href} class={`btn ${isDark ? 'btn--on-dark' : ''}`}>
+              <span>{secondaryCta.label}</span>
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

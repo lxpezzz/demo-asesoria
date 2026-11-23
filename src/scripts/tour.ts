@@ -6,118 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SCENE_IDS = SCENE_LIST.map((s) => s.id);
 
-function initInteractions(): () => void {
-  const cleanups: Array<() => void> = [];
-
-  // 1. Mobile navigation drawer
-  const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
-  const mobileDrawer = document.querySelector<HTMLElement>('[data-mobile-drawer]');
-
-  if (menuToggle && mobileDrawer) {
-    const closeDrawer = () => {
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Abrir menú de navegación');
-      mobileDrawer.hidden = true;
-    };
-
-    const toggleDrawer = () => {
-      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        closeDrawer();
-      } else {
-        menuToggle.setAttribute('aria-expanded', 'true');
-        menuToggle.setAttribute('aria-label', 'Cerrar menú de navegación');
-        mobileDrawer.hidden = false;
-      }
-    };
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && !mobileDrawer.hidden) {
-        closeDrawer();
-        menuToggle.focus();
-      }
-    };
-
-    menuToggle.addEventListener('click', toggleDrawer);
-    window.addEventListener('keydown', onKeyDown);
-
-    const mobileLinks = mobileDrawer.querySelectorAll<HTMLAnchorElement>('[data-mobile-link]');
-    mobileLinks.forEach((link) => link.addEventListener('click', closeDrawer));
-
-    cleanups.push(() => {
-      menuToggle.removeEventListener('click', toggleDrawer);
-      window.removeEventListener('keydown', onKeyDown);
-      mobileLinks.forEach((link) => link.removeEventListener('click', closeDrawer));
-    });
-  }
-
-  // 2. Inline fiscal breakdown toggle (refreshes ScrollTrigger cleanly)
-  const detailButtons = document.querySelectorAll<HTMLButtonElement>('[data-toggle-detail]');
-  detailButtons.forEach((btn) => {
-    const targetId = btn.dataset.toggleDetail;
-    const panel = targetId ? document.getElementById(targetId) : null;
-    if (!panel) return;
-
-    const onToggle = () => {
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!isExpanded));
-      panel.hidden = isExpanded;
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
-
-    btn.addEventListener('click', onToggle);
-    cleanups.push(() => btn.removeEventListener('click', onToggle));
-  });
-
-  // 3. Consultation CTA gently focuses first field after scroll
-  const focusConsulta = document.querySelector<HTMLAnchorElement>('[data-focus-consulta]');
-  const nameInput = document.getElementById('consulta-nombre') as HTMLInputElement | null;
-  if (focusConsulta && nameInput) {
-    const onFocusJump = () => {
-      window.setTimeout(() => nameInput.focus({ preventScroll: true }), 450);
-    };
-    focusConsulta.addEventListener('click', onFocusJump);
-    cleanups.push(() => focusConsulta.removeEventListener('click', onFocusJump));
-  }
-
-  // 4. Conceptual demo form — honest feedback, never simulates a confirmed booking
-  const demoForm = document.querySelector<HTMLFormElement>('[data-demo-form]');
-  const demoStatus = document.querySelector<HTMLElement>('[data-demo-status]');
-  if (demoForm && demoStatus) {
-    const onSubmit = (event: SubmitEvent) => {
-      event.preventDefault();
-      const formData = new FormData(demoForm);
-      const nombre = String(formData.get('nombre') ?? '').trim();
-      const correo = String(formData.get('correo') ?? '').trim();
-      const mensaje = String(formData.get('mensaje') ?? '').trim();
-
-      demoStatus.hidden = false;
-
-      if (!nombre || !correo || !mensaje) {
-        demoStatus.textContent =
-          'Completa tu nombre, correo electrónico y mensaje para comprobar la validación del formulario conceptual.';
-        return;
-      }
-
-      demoStatus.textContent =
-        'Modo demostración: los campos se han validado correctamente, pero este formulario conceptual no envía datos ni registra consultas todavía.';
-    };
-
-    demoForm.addEventListener('submit', onSubmit);
-    cleanups.push(() => demoForm.removeEventListener('submit', onSubmit));
-  }
-
-  return () => cleanups.forEach((fn) => fn());
-}
-
 function initActiveSceneTracking(): () => void {
   const header = document.querySelector<HTMLElement>('[data-site-header]');
   const progress = document.querySelector<HTMLElement>('[data-tour-progress]');
   const railFill = document.querySelector<HTMLElement>('[data-tour-rail-fill]');
   const scrim = document.querySelector<HTMLElement>('[data-stage-scrim]');
-  const hudCode = document.querySelector<HTMLElement>('[data-stage-code]');
-  const hudRoom = document.querySelector<HTMLElement>('[data-stage-room]');
-  const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-target]');
   const progressLinks = document.querySelectorAll<HTMLAnchorElement>('[data-progress-target]');
   const scenes = document.querySelectorAll<HTMLElement>('[data-scene]');
   const consultaBand = document.querySelector<HTMLElement>('[data-surface-band]');
@@ -125,7 +18,6 @@ function initActiveSceneTracking(): () => void {
   const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
 
   const setActiveScene = (sceneId: string, scrimMode: string) => {
-    const spec = SCENE_LIST.find((s) => s.id === sceneId) ?? SCENE_LIST[0];
     const headerSurface = isDesktop()
       ? 'dark'
       : sceneId === 'entrada'
@@ -137,16 +29,6 @@ function initActiveSceneTracking(): () => void {
     if (header) header.dataset.surface = headerSurface;
     if (progress) progress.dataset.surface = 'dark';
     if (scrim) scrim.dataset.stageScrim = scrimMode;
-    if (hudCode) hudCode.textContent = spec.code;
-    if (hudRoom) hudRoom.textContent = spec.roomLabel;
-
-    navLinks.forEach((link) => {
-      if (link.dataset.navTarget === sceneId) {
-        link.setAttribute('aria-current', 'location');
-      } else {
-        link.removeAttribute('aria-current');
-      }
-    });
 
     progressLinks.forEach((link) => {
       const isActive = link.dataset.progressTarget === sceneId;
@@ -337,7 +219,6 @@ function initScrollChoreography(): () => void {
 }
 
 export function mountTour(): void {
-  const cleanupInteractions = initInteractions();
   const cleanupTracking = initActiveSceneTracking();
   const cleanupMotion = initScrollChoreography();
 
@@ -348,7 +229,6 @@ export function mountTour(): void {
     window.removeEventListener('resize', onResize);
     cleanupMotion();
     cleanupTracking();
-    cleanupInteractions();
   };
 
   window.addEventListener('pagehide', teardown, { once: true });

@@ -28,12 +28,6 @@ import { SCENE_LIST } from '../data/scenes';
   </div>
 
   <div class="tour-stage__scrim" data-stage-scrim="left"></div>
-
-  <div class="tour-stage__hud">
-    <span class="tour-stage__hud-code" data-stage-code>01 / ENTRADA</span>
-    <span class="tour-stage__hud-sep">/</span>
-    <span class="tour-stage__hud-room" data-stage-room>Umbral de acceso y recepción</span>
-  </div>
 </div>
 
 <style>
@@ -118,37 +112,5 @@ import { SCENE_LIST } from '../data/scenes';
       rgba(22, 20, 18, 0.06) 38%,
       rgba(22, 20, 18, 0.56) 100%
     );
-  }
-
-  .tour-stage__hud {
-    position: absolute;
-    left: var(--gutter);
-    top: calc(var(--header-height) + 1rem);
-    z-index: 3;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.45rem 0.8rem;
-    background-color: rgba(24, 22, 20, 0.68);
-    border: 1px solid rgba(245, 242, 236, 0.2);
-    color: var(--ink-on-dark);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-variant-numeric: tabular-nums;
-    pointer-events: none;
-  }
-
-  .tour-stage__hud-code {
-    font-weight: 600;
-    color: var(--wood-oak-light);
-  }
-
-  .tour-stage__hud-sep {
-    opacity: 0.4;
-  }
-
-  .tour-stage__hud-room {
-    color: var(--ink-on-dark-muted);
   }
 </style>

@@ -1,0 +1,45 @@
+---
+import type { FaqItem } from '../data/pages';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  items: FaqItem[];
+  surface?: 'offwhite' | 'ivory';
+}
+
+const {
+  eyebrow = 'PREGUNTAS FRECUENTES',
+  title = 'Dudas habituales antes de empezar',
+  items,
+  surface = 'offwhite',
+} = Astro.props;
+---
+
+<section class={`band band--${surface} faq-band`}>
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-layout__header">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 class="display-h2">{title}</h2>
+      </div>
+
+      <div class="faq-list">
+        {
+          items.map((item, index) => (
+            <details class="faq-item">
+              <summary class="faq-item__summary">
+                <span class="faq-item__num">0{index + 1}</span>
+                <span class="faq-item__question">{item.question}</span>
+                <span class="faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-item__body">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

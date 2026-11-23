@@ -18,14 +18,14 @@
           Indícanos brevemente en qué área necesitas apoyo y cómo prefieres que contactemos contigo.
         </p>
         <p class="consulta-block__notice">
-          <strong>Formulario de demostración:</strong> esta fase corresponde a la maqueta conceptual de la homepage. No existe envío ni reserva activa conectada todavía.
+          <strong>Formulario de demostración:</strong> preparado para futura integración. Si prefieres ver los datos completos de contacto, puedes acceder a la <a href="/contacto" class="inline-link">página de contacto</a>.
         </p>
       </div>
 
       <form class="consulta-form" data-demo-form novalidate>
         <div class="consulta-form__row">
           <div class="field">
-            <label for="consulta-nombre" class="field__label">Nombre y apellidos</label>
+            <label for="consulta-nombre" class="field__label">Nombre y apellidos *</label>
             <input
               id="consulta-nombre"
               name="nombre"
@@ -33,12 +33,14 @@
               autocomplete="name"
               placeholder="Ej. María Gómez"
               class="field__input"
+              aria-describedby="consulta-nombre-error"
               required
             />
+            <span id="consulta-nombre-error" class="field__error" data-field-error="consulta-nombre" hidden></span>
           </div>
 
           <div class="field">
-            <label for="consulta-correo" class="field__label">Correo electrónico</label>
+            <label for="consulta-correo" class="field__label">Correo electrónico *</label>
             <input
               id="consulta-correo"
               name="correo"
@@ -46,8 +48,10 @@
               autocomplete="email"
               placeholder="nombre@ejemplo.es"
               class="field__input"
+              aria-describedby="consulta-correo-error"
               required
             />
+            <span id="consulta-correo-error" class="field__error" data-field-error="consulta-correo" hidden></span>
           </div>
         </div>
 
@@ -62,15 +66,17 @@
         </div>
 
         <div class="field">
-          <label for="consulta-mensaje" class="field__label">¿En qué podemos ayudarte?</label>
+          <label for="consulta-mensaje" class="field__label">¿En qué podemos ayudarte? *</label>
           <textarea
             id="consulta-mensaje"
             name="mensaje"
             rows="4"
             placeholder="Cuéntanos brevemente tu actividad o la consulta que quieres resolver."
             class="field__input field__textarea"
+            aria-describedby="consulta-mensaje-error"
             required
           ></textarea>
+          <span id="consulta-mensaje-error" class="field__error" data-field-error="consulta-mensaje" hidden></span>
         </div>
 
         <div class="consulta-form__actions">

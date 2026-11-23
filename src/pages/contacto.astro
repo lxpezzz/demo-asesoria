@@ -1,0 +1,205 @@
+---
+import InteriorLayout from '../layouts/InteriorLayout.astro';
+import { CONTACTO_PAGE } from '../data/pages';
+import { SCENE_VISUALS } from '../data/scenes';
+
+const visual = SCENE_VISUALS.contacto;
+---
+
+<InteriorLayout
+  title={CONTACTO_PAGE.meta.title}
+  description={CONTACTO_PAGE.meta.description}
+  ogImage={visual.imageDesktop}
+  headerSurface="light"
+>
+  <section class="hero-contact" aria-labelledby="titulo-contacto-page">
+    <div class="container">
+      <nav class="page-crumb" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Contacto</span>
+      </nav>
+
+      <div class="hero-contact__grid">
+        <div class="hero-contact__copy">
+          <p class="eyebrow">{CONTACTO_PAGE.hero.eyebrow}</p>
+          <h1 id="titulo-contacto-page" class="display-h1">{CONTACTO_PAGE.hero.title}</h1>
+          <p class="lead">{CONTACTO_PAGE.hero.lead}</p>
+        </div>
+
+        <figure class="hero-contact__banner">
+          <picture>
+            <source media="(max-width: 959px)" srcset={visual.imageMobile} type="image/webp" />
+            <img
+              src={visual.imageDesktop}
+              alt={visual.alt}
+              width={visual.width}
+              height={visual.height}
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
+              style={`object-position: ${visual.focalPoint};`}
+            />
+          </picture>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--ivory" aria-labelledby="contacto-formulario-titulo">
+    <div class="container">
+      <div class="contact-desk">
+        <div class="contact-info">
+          <p class="eyebrow">{CONTACTO_PAGE.info.eyebrow}</p>
+          <h2 class="display-h2">{CONTACTO_PAGE.info.title}</h2>
+          <p class="lead">{CONTACTO_PAGE.info.intro}</p>
+
+          <dl class="contact-info__list">
+            {
+              CONTACTO_PAGE.info.blocks.map((block) => (
+                <div class="contact-info__item">
+                  <dt class="contact-info__label">{block.label}</dt>
+                  <dd class="contact-info__value">{block.value}</dd>
+                  <dd class="contact-info__note">{block.note}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <p class="consulta-block__notice">{CONTACTO_PAGE.info.demoNote}</p>
+        </div>
+
+        <div class="contact-form-panel">
+          <div class="contact-form-panel__header">
+            <p class="eyebrow">FORMULARIO DE CONSULTA</p>
+            <h2 id="contacto-formulario-titulo" class="contact-form-panel__title">
+              Cuéntanos tu caso
+            </h2>
+          </div>
+
+          <form class="consulta-form" data-demo-form novalidate>
+            <div class="consulta-form__row">
+              <div class="field">
+                <label for="contacto-nombre" class="field__label">Nombre *</label>
+                <input
+                  id="contacto-nombre"
+                  name="nombre"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Tu nombre y apellidos"
+                  class="field__input"
+                  aria-describedby="contacto-nombre-error"
+                  required
+                />
+                <span id="contacto-nombre-error" class="field__error" data-field-error="contacto-nombre" hidden></span>
+              </div>
+
+              <div class="field">
+                <label for="contacto-email" class="field__label">Correo electrónico *</label>
+                <input
+                  id="contacto-email"
+                  name="correo"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="nombre@ejemplo.es"
+                  class="field__input"
+                  aria-describedby="contacto-email-error"
+                  required
+                />
+                <span id="contacto-email-error" class="field__error" data-field-error="contacto-email" hidden></span>
+              </div>
+            </div>
+
+            <div class="consulta-form__row">
+              <div class="field">
+                <label for="contacto-telefono" class="field__label">Teléfono (opcional)</label>
+                <input
+                  id="contacto-telefono"
+                  name="telefono"
+                  type="tel"
+                  autocomplete="tel"
+                  placeholder="Teléfono de contacto"
+                  class="field__input"
+                />
+              </div>
+
+              <div class="field">
+                <label for="contacto-servicio" class="field__label">Servicio de interés</label>
+                <select id="contacto-servicio" name="servicio" class="field__input">
+                  <option value="fiscal">Asesoría fiscal</option>
+                  <option value="contable">Asesoría contable</option>
+                  <option value="laboral">Asesoría laboral</option>
+                  <option value="integral">Asesoramiento integral</option>
+                  <option value="general">Consulta general</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="contacto-mensaje" class="field__label">Mensaje *</label>
+              <textarea
+                id="contacto-mensaje"
+                name="mensaje"
+                rows="5"
+                placeholder="Cuéntanos brevemente tu actividad, si eres autónomo o sociedad y en qué podemos ayudarte."
+                class="field__input field__textarea"
+                aria-describedby="contacto-mensaje-error"
+                required
+              ></textarea>
+              <span id="contacto-mensaje-error" class="field__error" data-field-error="contacto-mensaje" hidden></span>
+            </div>
+
+            <div class="consulta-form__actions">
+              <button type="submit" class="btn btn--primary">
+                <span>Cuéntanos tu caso</span>
+                <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="13 6 19 12 13 18" />
+                </svg>
+              </button>
+              <p class="consulta-form__disclaimer">
+                Formulario de demostración listo para futura integración. No envía ni almacena datos reales.
+              </p>
+            </div>
+
+            <div class="consulta-form__status" role="status" aria-live="polite" hidden data-demo-status></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="contacto-accesos">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">EXPLORAR ÁREAS</p>
+        <h2 id="contacto-accesos" class="related-header__title">
+          ¿Quieres revisar primero un área concreta?
+        </h2>
+      </div>
+
+      <div class="columns-ruled columns-ruled--4">
+        <a href="/fiscal" class="columns-ruled__item">
+          <span class="columns-ruled__num">01</span>
+          <h3 class="columns-ruled__title">Asesoría Fiscal</h3>
+          <p class="columns-ruled__desc">Impuestos, declaraciones y planificación tributaria.</p>
+        </a>
+        <a href="/contable" class="columns-ruled__item">
+          <span class="columns-ruled__num">02</span>
+          <h3 class="columns-ruled__title">Asesoría Contable</h3>
+          <p class="columns-ruled__desc">Libros contables, cuentas anuales y seguimiento económico.</p>
+        </a>
+        <a href="/laboral" class="columns-ruled__item">
+          <span class="columns-ruled__num">03</span>
+          <h3 class="columns-ruled__title">Asesoría Laboral</h3>
+          <p class="columns-ruled__desc">Nóminas, contratos, altas, bajas y Seguridad Social.</p>
+        </a>
+        <a href="/nosotros" class="columns-ruled__item">
+          <span class="columns-ruled__num">04</span>
+          <h3 class="columns-ruled__title">Nosotros</h3>
+          <p class="columns-ruled__desc">Conoce nuestra forma de trabajar y el despacho.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</InteriorLayout>

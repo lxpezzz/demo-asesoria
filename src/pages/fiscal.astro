@@ -1,0 +1,167 @@
+---
+import InteriorLayout from '../layouts/InteriorLayout.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import PageCtaBand from '../components/PageCtaBand.astro';
+import { FISCAL_PAGE } from '../data/pages';
+import { SCENE_VISUALS } from '../data/scenes';
+
+const visual = SCENE_VISUALS.fiscal;
+---
+
+<InteriorLayout
+  title={FISCAL_PAGE.meta.title}
+  description={FISCAL_PAGE.meta.description}
+  ogImage={visual.imageDesktop}
+  headerSurface="light"
+>
+  <section class="hero-split" aria-labelledby="titulo-fiscal-page">
+    <div class="container">
+      <nav class="page-crumb" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Asesoría Fiscal</span>
+      </nav>
+
+      <div class="hero-split__grid">
+        <div class="hero-split__copy">
+          <p class="eyebrow">{FISCAL_PAGE.hero.eyebrow}</p>
+          <h1 id="titulo-fiscal-page" class="display-h1">{FISCAL_PAGE.hero.title}</h1>
+          <p class="lead">{FISCAL_PAGE.hero.lead}</p>
+
+          <div class="btn-group">
+            <a href={FISCAL_PAGE.hero.primaryCta.href} class="btn btn--primary">
+              <span>{FISCAL_PAGE.hero.primaryCta.label}</span>
+              <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="13 6 19 12 13 18" />
+              </svg>
+            </a>
+            <a href={FISCAL_PAGE.hero.secondaryCta.href} class="btn">
+              <span>{FISCAL_PAGE.hero.secondaryCta.label}</span>
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero-split__media">
+          <picture>
+            <source media="(max-width: 767px)" srcset={visual.imageMobile} type="image/webp" />
+            <img
+              src={visual.imageDesktop}
+              alt={visual.alt}
+              width={visual.width}
+              height={visual.height}
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
+            />
+          </picture>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper" aria-labelledby="fiscal-que-hacemos">
+    <div class="container">
+      <div class="statement-grid">
+        <div class="statement-grid__lead">
+          <p class="eyebrow">{FISCAL_PAGE.whatWeDo.eyebrow}</p>
+          <h2 id="fiscal-que-hacemos" class="display-h2">{FISCAL_PAGE.whatWeDo.title}</h2>
+          <p class="statement-grid__quote">{FISCAL_PAGE.whatWeDo.statement}</p>
+        </div>
+
+        <div class="prose-stack">
+          {
+            FISCAL_PAGE.whatWeDo.items.map((item) => (
+              <article class="prose-stack__item">
+                <h3 class="prose-stack__title">{item.title}</h3>
+                <p class="prose-stack__desc">{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="fiscal-servicios">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{FISCAL_PAGE.services.eyebrow}</p>
+        <h2 id="fiscal-servicios" class="display-h2">{FISCAL_PAGE.services.title}</h2>
+      </div>
+
+      <div class="ledger-grid">
+        {
+          FISCAL_PAGE.services.items.map((item) => (
+            <article class="ledger-cell">
+              <span class="ledger-cell__code">{item.code}</span>
+              <h3 class="ledger-cell__title">{item.title}</h3>
+              <p class="ledger-cell__desc">{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--ivory" aria-labelledby="fiscal-audiencia">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{FISCAL_PAGE.audience.eyebrow}</p>
+        <h2 id="fiscal-audiencia" class="display-h2">{FISCAL_PAGE.audience.title}</h2>
+      </div>
+
+      <div class="columns-ruled columns-ruled--4">
+        {
+          FISCAL_PAGE.audience.items.map((item, idx) => (
+            <article class="columns-ruled__item">
+              <span class="columns-ruled__num">0{idx + 1}</span>
+              <h3 class="columns-ruled__title">{item.title}</h3>
+              <p class="columns-ruled__desc">{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="fiscal-proceso">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{FISCAL_PAGE.process.eyebrow}</p>
+        <h2 id="fiscal-proceso" class="display-h2">{FISCAL_PAGE.process.title}</h2>
+      </div>
+
+      <ol class="columns-ruled columns-ruled--3">
+        {
+          FISCAL_PAGE.process.steps.map((step) => (
+            <li class="columns-ruled__item">
+              <span class="columns-ruled__num">PASO {step.number}</span>
+              <h3 class="columns-ruled__title">{step.title}</h3>
+              <p class="columns-ruled__desc">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <FaqAccordion
+    eyebrow="05 · PREGUNTAS FRECUENTES"
+    title="Dudas habituales sobre asesoría fiscal"
+    items={FISCAL_PAGE.faqs}
+    surface="offwhite"
+  />
+
+  <RelatedServices links={FISCAL_PAGE.related} />
+
+  <PageCtaBand
+    eyebrow={FISCAL_PAGE.cta.eyebrow}
+    title={FISCAL_PAGE.cta.title}
+    description={FISCAL_PAGE.cta.description}
+    primaryCta={FISCAL_PAGE.cta.primaryCta}
+    secondaryCta={FISCAL_PAGE.cta.secondaryCta}
+    variant="dark"
+  />
+</InteriorLayout>

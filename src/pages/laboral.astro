@@ -1,0 +1,165 @@
+---
+import InteriorLayout from '../layouts/InteriorLayout.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import PageCtaBand from '../components/PageCtaBand.astro';
+import { LABORAL_PAGE } from '../data/pages';
+import { SCENE_VISUALS } from '../data/scenes';
+
+const visual = SCENE_VISUALS.laboral;
+---
+
+<InteriorLayout
+  title={LABORAL_PAGE.meta.title}
+  description={LABORAL_PAGE.meta.description}
+  ogImage={visual.imageDesktop}
+  headerSurface="dark"
+  flushTop={true}
+>
+  <section class="hero-bleed" aria-labelledby="titulo-laboral-page">
+    <div class="hero-bleed__media" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 959px)" srcset={visual.imageMobile} type="image/webp" />
+        <img
+          src={visual.imageDesktop}
+          alt={visual.alt}
+          width={visual.width}
+          height={visual.height}
+          loading="eager"
+          fetchpriority="high"
+          decoding="sync"
+          style={`object-position: ${visual.focalPoint};`}
+        />
+      </picture>
+    </div>
+    <div class="hero-bleed__scrim" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-bleed__content">
+        <nav class="page-crumb page-crumb--on-dark" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Asesoría Laboral</span>
+        </nav>
+
+        <p class="eyebrow eyebrow--on-dark">{LABORAL_PAGE.hero.eyebrow}</p>
+        <h1 id="titulo-laboral-page" class="display-h1">{LABORAL_PAGE.hero.title}</h1>
+        <p class="lead lead--on-dark">{LABORAL_PAGE.hero.lead}</p>
+
+        <div class="btn-group">
+          <a href={LABORAL_PAGE.hero.primaryCta.href} class="btn btn--on-dark-solid">
+            <span>{LABORAL_PAGE.hero.primaryCta.label}</span>
+            <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="13 6 19 12 13 18" />
+            </svg>
+          </a>
+          <a href={LABORAL_PAGE.hero.secondaryCta.href} class="btn btn--on-dark">
+            <span>{LABORAL_PAGE.hero.secondaryCta.label}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="laboral-servicios">
+    <div class="container">
+      <div class="sticky-index">
+        <div class="sticky-index__aside">
+          <p class="eyebrow">{LABORAL_PAGE.services.eyebrow}</p>
+          <h2 id="laboral-servicios" class="display-h2">{LABORAL_PAGE.services.title}</h2>
+          <p class="lead">{LABORAL_PAGE.services.lead}</p>
+        </div>
+
+        <ol class="index-rows">
+          {
+            LABORAL_PAGE.services.items.map((item) => (
+              <li class="index-row">
+                <span class="index-row__code">{item.code}</span>
+                <div class="index-row__content">
+                  <h3 class="index-row__title">{item.title}</h3>
+                  <p class="index-row__desc">{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--ivory" aria-labelledby="laboral-ayuda">
+    <div class="container">
+      <div class="essay-grid">
+        <div class="essay-grid__head">
+          <p class="eyebrow">{LABORAL_PAGE.howWeHelp.eyebrow}</p>
+          <h2 id="laboral-ayuda" class="display-h2">{LABORAL_PAGE.howWeHelp.title}</h2>
+        </div>
+
+        <div class="essay-grid__body">
+          {LABORAL_PAGE.howWeHelp.paragraphs.map((text) => <p>{text}</p>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper" aria-labelledby="laboral-situaciones">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{LABORAL_PAGE.situations.eyebrow}</p>
+        <h2 id="laboral-situaciones" class="display-h2">{LABORAL_PAGE.situations.title}</h2>
+      </div>
+
+      <div class="ledger-grid">
+        {
+          LABORAL_PAGE.situations.items.map((item) => (
+            <article class="ledger-cell">
+              <span class="ledger-cell__code">{item.code}</span>
+              <h3 class="ledger-cell__title">{item.title}</h3>
+              <p class="ledger-cell__desc">{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="laboral-forma">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{LABORAL_PAGE.approach.eyebrow}</p>
+        <h2 id="laboral-forma" class="display-h2">{LABORAL_PAGE.approach.title}</h2>
+      </div>
+
+      <ol class="columns-ruled columns-ruled--3">
+        {
+          LABORAL_PAGE.approach.items.map((item) => (
+            <li class="columns-ruled__item">
+              <span class="columns-ruled__num">{item.number}</span>
+              <h3 class="columns-ruled__title">{item.title}</h3>
+              <p class="columns-ruled__desc">{item.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <FaqAccordion
+    eyebrow="05 · PREGUNTAS FRECUENTES"
+    title="Dudas habituales sobre gestión laboral"
+    items={LABORAL_PAGE.faqs}
+    surface="offwhite"
+  />
+
+  <RelatedServices links={LABORAL_PAGE.related} />
+
+  <PageCtaBand
+    eyebrow={LABORAL_PAGE.cta.eyebrow}
+    title={LABORAL_PAGE.cta.title}
+    description={LABORAL_PAGE.cta.description}
+    primaryCta={LABORAL_PAGE.cta.primaryCta}
+    secondaryCta={LABORAL_PAGE.cta.secondaryCta}
+    variant="dark"
+  />
+</InteriorLayout>

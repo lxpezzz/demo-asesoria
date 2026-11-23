@@ -1,10 +1,22 @@
 ---
 import { SITE_META, TOUR_NAV } from '../data/scenes';
+
+interface Props {
+  surface?: 'dark' | 'light' | 'ivory';
+}
+
+const { surface = 'light' } = Astro.props;
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActivePath = (href: string) => {
+  const normalized = href.replace(/\/+$/, '') || '/';
+  return currentPath === normalized;
+};
 ---
 
-<header class="site-header" data-site-header data-surface="dark">
+<header class="site-header" data-site-header data-surface={surface}>
   <div class="container site-header__inner">
-    <a href="#entrada" class="brand" aria-label={`${SITE_META.brandName} — ${SITE_META.brandDescriptor}, ir al inicio`}>
+    <a href="/" class="brand" aria-label={`${SITE_META.brandName} — ${SITE_META.brandDescriptor}, ir al inicio`}>
       <span class="brand__name">{SITE_META.brandName}</span>
       <span class="brand__sep" aria-hidden="true">/</span>
       <span class="brand__desc">{SITE_META.brandDescriptor}</span>
@@ -13,23 +25,26 @@ import { SITE_META, TOUR_NAV } from '../data/scenes';
     <nav class="site-nav" aria-label="Navegación principal">
       <ul class="site-nav__list">
         {
-          TOUR_NAV.map((item) => (
-            <li>
-              <a
-                href={`#${item.id}`}
-                class="site-nav__link"
-                data-nav-target={item.id}
-              >
-                {item.navLabel}
-              </a>
-            </li>
-          ))
+          TOUR_NAV.map((item) => {
+            const active = isActivePath(item.href);
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class="site-nav__link"
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.navLabel}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </nav>
 
     <div class="site-header__actions">
-      <a href="#consulta" class="header-cta">Hablemos</a>
+      <a href="/contacto" class="header-cta">Hablemos</a>
       <button
         type="button"
         class="menu-toggle"
@@ -54,18 +69,26 @@ import { SITE_META, TOUR_NAV } from '../data/scenes';
     <nav class="container mobile-drawer__nav" aria-label="Navegación móvil">
       <ul class="mobile-drawer__list">
         {
-          TOUR_NAV.map((item) => (
-            <li class="mobile-drawer__item">
-              <a href={`#${item.id}`} class="mobile-drawer__link" data-mobile-link>
-                <span class="mobile-drawer__num">{item.number}</span>
-                <span>{item.navLabel}</span>
-              </a>
-            </li>
-          ))
+          TOUR_NAV.map((item) => {
+            const active = isActivePath(item.href);
+            return (
+              <li class="mobile-drawer__item">
+                <a
+                  href={item.href}
+                  class={`mobile-drawer__link ${active ? 'is-active' : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                  data-mobile-link
+                >
+                  <span class="mobile-drawer__num">{item.number}</span>
+                  <span>{item.navLabel}</span>
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
       <div class="mobile-drawer__footer">
-        <a href="#consulta" class="btn btn--primary" data-mobile-link>
+        <a href="/contacto" class="btn btn--primary" data-mobile-link>
           Hablemos
         </a>
       </div>
@@ -88,19 +111,19 @@ import { SITE_META, TOUR_NAV } from '../data/scenes';
   }
 
   .site-header[data-surface='dark'] {
-    background-color: rgba(24, 22, 20, 0.72);
+    background-color: rgba(24, 22, 20, 0.76);
     color: var(--ink-on-dark);
     border-bottom: 1px solid rgba(245, 242, 236, 0.16);
   }
 
   .site-header[data-surface='light'] {
-    background-color: rgba(245, 242, 236, 0.94);
+    background-color: rgba(245, 242, 236, 0.96);
     color: var(--ink-primary);
     border-bottom: 1px solid var(--line-subtle);
   }
 
   .site-header[data-surface='ivory'] {
-    background-color: rgba(235, 230, 220, 0.95);
+    background-color: rgba(235, 230, 220, 0.96);
     color: var(--ink-primary);
     border-bottom: 1px solid var(--line-subtle);
   }
@@ -168,26 +191,44 @@ import { SITE_META, TOUR_NAV } from '../data/scenes';
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding-block: 0.35rem;
-    opacity: 0.78;
+    opacity: 0.74;
     transition: opacity var(--dur-fast) var(--ease-architectural);
   }
 
-  .site-nav__link:hover,
-  .site-nav__link[aria-current='location'] {
-    opacity: 1;
-  }
-
-  .site-nav__link[aria-current='location']::after {
+  .site-nav__link::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
     bottom: -2px;
     height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-fast) var(--ease-architectural);
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link[aria-current='page'] {
+    opacity: 1;
+  }
+
+  .site-nav__link:hover::after {
+    transform: scaleX(1);
+    opacity: 0.45;
+  }
+
+  .site-nav__link[aria-current='page'] {
+    font-weight: 600;
+  }
+
+  .site-nav__link[aria-current='page']::after {
+    transform: scaleX(1);
+    opacity: 1;
     background-color: var(--accent-terracotta);
   }
 
-  .site-header[data-surface='dark'] .site-nav__link[aria-current='location']::after {
+  .site-header[data-surface='dark'] .site-nav__link[aria-current='page']::after {
     background-color: var(--wood-oak-light);
   }
 
@@ -257,6 +298,8 @@ import { SITE_META, TOUR_NAV } from '../data/scenes';
     color: var(--ink-primary);
     border-top: 1px solid var(--line-subtle);
     border-bottom: 1px solid var(--line-strong);
+    max-height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
   }
 
   .mobile-drawer[hidden] {
@@ -281,6 +324,11 @@ import { SITE_META, TOUR_NAV } from '../data/scenes';
     padding-block: 0.95rem;
     font-size: 1.05rem;
     font-weight: 500;
+  }
+
+  .mobile-drawer__link.is-active {
+    color: var(--accent-terracotta-dark);
+    font-weight: 600;
   }
 
   .mobile-drawer__num {

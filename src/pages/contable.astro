@@ -1,0 +1,179 @@
+---
+import InteriorLayout from '../layouts/InteriorLayout.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import PageCtaBand from '../components/PageCtaBand.astro';
+import { CONTABLE_PAGE } from '../data/pages';
+import { SCENE_VISUALS } from '../data/scenes';
+
+const visual = SCENE_VISUALS.contable;
+---
+
+<InteriorLayout
+  title={CONTABLE_PAGE.meta.title}
+  description={CONTABLE_PAGE.meta.description}
+  ogImage={visual.imageDesktop}
+  headerSurface="ivory"
+>
+  <section class="hero-panoramic" aria-labelledby="titulo-contable-page">
+    <div class="container">
+      <nav class="page-crumb" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Asesoría Contable</span>
+      </nav>
+
+      <div class="hero-panoramic__top">
+        <div class="hero-panoramic__head">
+          <p class="eyebrow">{CONTABLE_PAGE.hero.eyebrow}</p>
+          <h1 id="titulo-contable-page" class="display-h1">{CONTABLE_PAGE.hero.title}</h1>
+        </div>
+
+        <div class="hero-panoramic__aside">
+          <p class="lead">{CONTABLE_PAGE.hero.lead}</p>
+          <div class="btn-group">
+            <a href={CONTABLE_PAGE.hero.primaryCta.href} class="btn btn--primary">
+              <span>{CONTABLE_PAGE.hero.primaryCta.label}</span>
+              <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="13 6 19 12 13 18" />
+              </svg>
+            </a>
+            <a href={CONTABLE_PAGE.hero.secondaryCta.href} class="btn">
+              <span>{CONTABLE_PAGE.hero.secondaryCta.label}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <figure class="hero-panoramic__frame">
+        <picture>
+          <source media="(max-width: 959px)" srcset={visual.imageMobile} type="image/webp" />
+          <img
+            src={visual.imageDesktop}
+            alt={visual.alt}
+            width={visual.width}
+            height={visual.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="contable-incluye">
+    <div class="container">
+      <div class="sticky-index">
+        <div class="sticky-index__aside">
+          <p class="eyebrow">{CONTABLE_PAGE.includes.eyebrow}</p>
+          <h2 id="contable-incluye" class="display-h2">{CONTABLE_PAGE.includes.title}</h2>
+          <p class="lead">{CONTABLE_PAGE.includes.lead}</p>
+        </div>
+
+        <ol class="index-rows">
+          {
+            CONTABLE_PAGE.includes.items.map((item) => (
+              <li class="index-row">
+                <span class="index-row__code">{item.code}</span>
+                <div class="index-row__content">
+                  <h3 class="index-row__title">{item.title}</h3>
+                  <p class="index-row__desc">{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--charcoal" aria-labelledby="contable-importante">
+    <div class="container">
+      <div class="pullout-grid">
+        <div class="pullout-copy">
+          <p class="eyebrow eyebrow--on-dark">{CONTABLE_PAGE.whyItMatters.eyebrow}</p>
+          <h2 id="contable-importante" class="display-h2">{CONTABLE_PAGE.whyItMatters.title}</h2>
+        </div>
+
+        <div class="pullout-paragraphs">
+          {CONTABLE_PAGE.whyItMatters.paragraphs.map((text) => <p>{text}</p>)}
+        </div>
+      </div>
+
+      <div class="pullout-highlights">
+        {
+          CONTABLE_PAGE.whyItMatters.highlights.map((item) => (
+            <div>
+              <span class="pullout-highlight__label">{item.label}</span>
+              <p class="pullout-highlight__value">{item.value}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper" aria-labelledby="contable-proceso">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{CONTABLE_PAGE.process.eyebrow}</p>
+        <h2 id="contable-proceso" class="display-h2">{CONTABLE_PAGE.process.title}</h2>
+      </div>
+
+      <ol class="columns-ruled columns-ruled--4">
+        {
+          CONTABLE_PAGE.process.steps.map((step) => (
+            <li class="columns-ruled__item">
+              <span class="columns-ruled__num">PASO {step.number}</span>
+              <h3 class="columns-ruled__title">{step.title}</h3>
+              <p class="columns-ruled__desc">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="band band--offwhite" aria-labelledby="contable-audiencia">
+    <div class="container">
+      <div class="statement-grid">
+        <div class="statement-grid__lead">
+          <p class="eyebrow">{CONTABLE_PAGE.audience.eyebrow}</p>
+          <h2 id="contable-audiencia" class="display-h2">{CONTABLE_PAGE.audience.title}</h2>
+          <p class="lead">{CONTABLE_PAGE.audience.lead}</p>
+        </div>
+
+        <div class="prose-stack">
+          {
+            CONTABLE_PAGE.audience.items.map((item) => (
+              <article class="prose-stack__item">
+                <h3 class="prose-stack__title">{item.title}</h3>
+                <p class="prose-stack__desc">{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqAccordion
+    eyebrow="05 · PREGUNTAS FRECUENTES"
+    title="Dudas habituales sobre asesoría contable"
+    items={CONTABLE_PAGE.faqs}
+    surface="offwhite"
+  />
+
+  <RelatedServices links={CONTABLE_PAGE.related} />
+
+  <PageCtaBand
+    eyebrow={CONTABLE_PAGE.cta.eyebrow}
+    title={CONTABLE_PAGE.cta.title}
+    description={CONTABLE_PAGE.cta.description}
+    primaryCta={CONTABLE_PAGE.cta.primaryCta}
+    secondaryCta={CONTABLE_PAGE.cta.secondaryCta}
+    variant="dark"
+  />
+</InteriorLayout>

@@ -58,6 +58,9 @@ h4,
 p,
 ul,
 ol,
+dl,
+dt,
+dd,
 figure {
   margin: 0;
 }

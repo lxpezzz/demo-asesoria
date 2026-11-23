@@ -1,0 +1,39 @@
+---
+import type { RelatedLink } from '../data/pages';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  links: RelatedLink[];
+}
+
+const { eyebrow = 'OTRAS ÁREAS DEL DESPACHO', title = 'Un mismo equipo para toda tu gestión', links } = Astro.props;
+---
+
+<section class="band band--ivory related-band">
+  <div class="container">
+    <div class="related-header">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 class="related-header__title">{title}</h2>
+    </div>
+
+    <div class="related-grid">
+      {
+        links.map((item) => (
+          <a href={item.href} class="related-item">
+            <span class="related-item__eyebrow">{item.eyebrow}</span>
+            <h3 class="related-item__title">{item.title}</h3>
+            <p class="related-item__desc">{item.description}</p>
+            <span class="related-item__link">
+              <span>Explorar área</span>
+              <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="13 6 19 12 13 18" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
