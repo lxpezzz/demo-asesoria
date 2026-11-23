@@ -21,7 +21,16 @@ const containerClass = hasTourRail ? 'container container--tour' : 'container';
         Asesoramiento fiscal, contable y laboral con trato directo, explicaciones claras y acompañamiento cercano.
       </p>
       <p class="site-footer__notice">
-        Demo conceptual de asesoría familiar. Estructura y contenidos de demostración sin vinculación a un despacho real.
+        Demo conceptual · Página web creada por{' '}
+        <a
+          href="https://7dstudio.es"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="site-footer__studio-link"
+        >
+          7DStudio
+        </a>
+        . Estructura y contenidos de demostración sin vinculación a un despacho real.
       </p>
     </div>
 
@@ -60,7 +69,16 @@ const containerClass = hasTourRail ? 'container container--tour' : 'container';
 
   <div class={`${containerClass} site-footer__bottom`}>
     <p class="site-footer__meta">
-      © 2026 {SITE_META.brandName} · {SITE_META.brandDescriptor}. Proyecto de demostración conceptual.
+      © 2026 {SITE_META.brandName} · {SITE_META.brandDescriptor} — Demo conceptual creada por{' '}
+      <a
+        href="https://7dstudio.es"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="site-footer__studio-link"
+      >
+        7DStudio
+      </a>
+      .
     </p>
     <a href="#contenido-principal" class="site-footer__top">Volver arriba</a>
   </div>
@@ -207,6 +225,19 @@ const containerClass = hasTourRail ? 'container container--tour' : 'container';
   }
 
   .site-footer__top:hover {
+    color: var(--accent-terracotta-dark);
+  }
+
+  .site-footer__studio-link {
+    font-weight: 600;
+    color: var(--ink-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--accent-terracotta);
+    transition: color var(--dur-fast) var(--ease-architectural);
+  }
+
+  .site-footer__studio-link:hover {
     color: var(--accent-terracotta-dark);
   }
 </style>

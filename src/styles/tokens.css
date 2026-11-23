@@ -47,7 +47,9 @@
   /* Spacing & layout */
   --container-max: 1360px;
   --gutter: clamp(1.25rem, 3.6vw, 3.5rem);
-  --header-height: 72px;
+  --ribbon-height: 28px;
+  --header-bar-height: 72px;
+  --header-height: calc(var(--header-bar-height) + var(--ribbon-height));
   --rail-clearance: 6.5rem;
 
   /* Motion */
@@ -58,7 +60,7 @@
 
 @media (max-width: 1023px) {
   :root {
-    --header-height: 64px;
+    --header-bar-height: 64px;
     --rail-clearance: 0rem;
   }
 }
